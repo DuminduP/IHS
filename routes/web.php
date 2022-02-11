@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\InstitutionController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\GrievanceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,12 +16,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::get('/', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::get('/', [DashboardController::class, 'dashboard'])->middleware(['auth'])->name('dashboard');
+Route::get('/grievanse/view/{id}', [GrievanceController::class, 'view'])->middleware(['auth'])->name('view-grievanse');
+Route::get('/grievanse/edit/{id}', [GrievanceController::class, 'edit'])->middleware(['auth'])->name('edit-grievanse');
+
+
+
+Route::get('/debug-sentry', function () {
+    throw new Exception('My first Sentry error!');
+});
 
 require __DIR__.'/auth.php';
