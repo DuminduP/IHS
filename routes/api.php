@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\InstitutionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::get('/institution/{id}', [InstitutionController::class, 'getInstitution']);
+Route::get('/sub-institution/{id}', [InstitutionController::class, 'getSubInstitution']);
+Route::post('/grievance', [InstitutionController::class, 'saveGrievance']);
+Route::post('/rate', 'InstitutionController@saveRate');
