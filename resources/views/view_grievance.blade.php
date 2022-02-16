@@ -12,8 +12,7 @@
 
         <div class="flex items-center justify-center" style="font-size: 20px; border-bottom: 1px dashed;">
             <h1 style="margin-right: 10px">Grievance Owner Details </h1>
-            <a href="{{ route('edit-grievanse', ['id' => $grievance->id]) }}" title="Edit"><i
-                    class="fas fa-edit"></i></a>
+            <a href="{{ route('edit-grievanse', ['id' => $grievance->id]) }}" title="Edit"><i class="fas fa-edit"></i></a>
         </div>
         <div style="margin-top:20px">
             <x-namevalue-div :name="__('Name')" :value="$grievance->owner->name" />
@@ -34,8 +33,9 @@
         <div style="margin-top:20px">
             <x-namevalue-div :name="__('Title')" :value="$grievance->title" />
             <x-namevalue-div :name="__('Description')" :value="$grievance->description" />
-            <x-namevalue-div :name="__('Notes')" :value="$grievance->notes" />
+            <x-namevalue-div :name="__('Notes')" :value="$grievance->notes " />
             <x-namevalue-div :name="__('Institution')" :value="$grievance->institution->name" />
+            <x-namevalue-div :name="__('Created At')" :value="$grievance->created_at" />
             {{-- <x-namevalue-div :name="__('Sub Institution')" :value="$grievance->sub_institution->name" /> --}}
         </div>
 

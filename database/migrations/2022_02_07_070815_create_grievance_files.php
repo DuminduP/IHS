@@ -18,7 +18,7 @@ class CreateGrievanceFiles extends Migration
             $table->integer('grievance_id');
             $table->string('name');
             $table->string('type');
-            $table->text('notes');
+            $table->text('notes')->nullable();
             $table->timestamps();
         });
     }

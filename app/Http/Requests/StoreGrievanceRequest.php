@@ -29,6 +29,7 @@ class StoreGrievanceRequest extends FormRequest
             'id' => 'required',
             'title' => 'required',
             'description' => 'required',
+            'g-recaptcha-response' => 'required|captcha',
         ];
     }
 }

@@ -15,6 +15,11 @@
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
+        <script
+        src="https://www.google.com/recaptcha/api.js"
+        async
+        defer
+    ></script>
     </head>
     <body>
         <div class="font-sans text-gray-900 antialiased">

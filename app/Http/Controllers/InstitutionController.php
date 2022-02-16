@@ -47,6 +47,7 @@ class InstitutionController extends Controller
             $grievance->grievance_owner_id = $owner->id;
             $grievance->institution_id = $request->id;
             $grievance->sub_institution_id = $request->sid;
+            $grievance->uuid = $grievance->getUuid();
             $grievance->save();
 
             //handel file uploads
@@ -63,7 +64,7 @@ class InstitutionController extends Controller
                 } 
             }
 
-            $result = [ 'status'=> 200, 'message'=>'Grievance Successfully saved!', 'data'=>['clientRefNo'=>$owner->id, 'grievanceRefNo'=>$grievance->id]];
+            $result = [ 'status'=> 200, 'message'=>'Grievance successfully saved!', 'data'=>['grievanceRefNo'=>$grievance->uuid]];
 
         } catch (\Exception $e) {
             DB::rollback();

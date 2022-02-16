@@ -17,9 +17,9 @@ class CreateGrievanceOwners extends Migration
             $table->id();
             $table->integer('grievance_id');
             $table->string('name');
-            $table->string('address');
+            $table->string('address')->nullable();
             $table->char('mobile', 10);
-            $table->string('email');
+            $table->string('email')->nullable();
             $table->string('user_agent');
             $table->string('ip');
             $table->timestamps();

@@ -4,5 +4,5 @@
     {{ $name ?? $slot }}:
 </div>
 <div {{ $attributes->merge(['class' => 'md-4 block font-medium text-lg text-gray-700']) }} style="width:55%;float:left; margin-bottom:10px;">
-    {{ $value ?? $slot }}
+    {{ $value ?? '_' }}
 </div>

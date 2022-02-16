@@ -16,7 +16,7 @@ class CreateGrievanceTypes extends Migration
         Schema::create('grievance_types', function (Blueprint $table) {
             $table->id();
             $table->string('type');
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->timestamps();
         });
     }

@@ -14,10 +14,10 @@ class UpdateUsers extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->tinyInteger('role_id'); // 1-super_admin, 2-admin, 3-user
-            $table->integer('institution_id'); 
-            $table->tinyInteger('status'); // 1-active, 2-inactive
-            $table->char('mobile', 10);
+            $table->tinyInteger('role_id')->default(3); // 1-super_admin, 2-admin, 3-user
+            $table->integer('institution_id')->nullable(); 
+            $table->tinyInteger('status')->default(1); // 1-active, 2-inactive
+            $table->char('mobile', 10)->nullable();
             
         });
     }
