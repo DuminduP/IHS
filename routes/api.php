@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\InstitutionController;
+use App\Http\Controllers\ApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +15,8 @@ use App\Http\Controllers\InstitutionController;
 |
 */
 
-Route::get('/institution/{id}', [InstitutionController::class, 'getInstitution']);
-Route::get('/sub-institution/{id}', [InstitutionController::class, 'getSubInstitution']);
-Route::post('/grievance', [InstitutionController::class, 'saveGrievance']);
+Route::get('/institution/{id}', [ApiController::class, 'getInstitution']);
+Route::get('/sub-institution/{id}', [ApiController::class, 'getSubInstitution']);
+Route::post('/grievance', [ApiController::class, 'saveGrievance']);
+Route::get('/grievance/details/{uuid}', [ApiController::class, 'getGrievanceByUuid']);
 Route::post('/rate', 'InstitutionController@saveRate');

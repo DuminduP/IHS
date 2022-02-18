@@ -10,6 +10,11 @@ class Grievance extends Model
 {
     use HasFactory;
 
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d H:i',
+        'updated_at' => 'datetime:Y-m-d H:i',
+    ];
+
     public function institution()
     {
         return $this->belongsTo(Institution::class);
@@ -31,4 +36,5 @@ class Grievance extends Model
 
         return $unique;
     }
+
 }

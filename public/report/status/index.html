@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Public Grievance Information System, Sri Lanka</title>
+        <meta
+            name="description"
+            content="Public Grievance Information System, Sri Lanka"
+        />
+        <meta name="author" content="Sampath Perera" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <base href="/report/" />
+        <link rel="stylesheet" href="css/normalize.css" />
+        <link rel="stylesheet" href="css/skeleton.css" />
+        <link rel="stylesheet" href="css/custom.css" />
+        <link rel="icon" type="image/png" href="logo.png" />
+    </head>
+
+    <body>
+        <div class="table-container">
+            <div class="row section-heading">
+                <div style="float: left">
+                    <img
+                        class="u-max-full-width"
+                        style="width: 64px; padding: 5px"
+                        src="logo.png"
+                        alt="Logo"
+                    />
+                </div>
+                <div>
+                    <h4>Public Grievance Information System</h4>
+                    <h4>Ministry of Public Services</h4>
+                    <h4>Sri Lanka</h4>
+                </div>
+            </div>
+            <div class="contacontainer">
+                <div class="row subheading" style="margin-top: 15px">
+                    <h4 class="section-description" style="text-align: center;">Grievance Status</h4>
+                    <table class="u-full-width" style="font-size: 1.5rem;">
+                        <tbody>
+                        <tr>
+                            <td class="title">Reference Number </td>
+                            <td id="uuid">Loading...</td>
+                        </tr>
+                        <tr>
+                            <td class="title">Title </td>
+                            <td id="title">Loading...</td>
+                        </tr>
+                        <tr>
+                            <td class="title">Institution </td>
+                            <td id="institution_name">Loading...</td>
+                        </tr>
+                        <tr>
+                            <td class="title">Description </td>
+                            <td id="description">Loading...</td>
+                        </tr>
+                        <tr>
+                            <td class="title">Notes </td>
+                            <td id="notes">Loading...</td>
+                        </tr>
+                        <tr>
+                            <td class="title">Status </td>
+                            <td id="status">Loading...</td>
+                        </tr>
+                        <tr>
+                            <td class="title">Created at </td>
+                            <td id="created_at">Loading...</td>
+                        </tr>
+                        <tr>
+                            <td class="title">Last updated at </td>
+                            <td id="updated_at">Loading...</td>
+                        </tr>
+                    </tbody>
+                    </table>
+        </div>
+
+        <footer id="footer"></footer>
+    </body>
+    <script
+        src="https://code.jquery.com/jquery-2.2.4.min.js"
+        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+        crossorigin="anonymous"
+    ></script>
+    <script>
+        let searchParams = new URLSearchParams(window.location.search);
+        var url = "";
+        var code = searchParams.get("uuid");
+        if (code) {
+            url = "/api/grievance/details/";
+        } else {
+            alert('Invalid URL');
+        }
+
+        if (code) {
+            $.getJSON(url + code, function (data) {
+                if (data.message == "Success") {
+                    for(const element in data.data)   {
+                        $('#'+element).html(data.data[element]);
+                    }
+                    if(data.data.sub_institution_name)  {
+                        $('#institution_name').html(data.data.sub_institution_name+',<br/>'+data.data.institution_name);
+                    }
+                } else {
+                    alert("Grievance not found. Please try again later.");
+                }
+            })
+            .fail(function() { alert("Grievance not found. Please try again later."); })
+        } else {
+            alert("Grievance not found");
+        }
+
+    </script>
+</html>
