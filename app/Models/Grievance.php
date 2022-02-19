@@ -20,6 +20,16 @@ class Grievance extends Model
         return $this->belongsTo(Institution::class);
     }
 
+    public function sub_institution()
+    {
+        return $this->belongsTo(SubInstitution::class);
+    }
+
+    public function files()
+    {
+        return $this->hasMany(GrievanceFile::class);
+    }
+
     public function owner()
     {
         return $this->belongsTo(GrievanceOwner::class, 'grievance_owner_id');

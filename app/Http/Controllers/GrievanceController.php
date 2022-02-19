@@ -13,4 +13,11 @@ class GrievanceController extends Controller
         return view('view_grievance', $data);
     }
 
+    public function edit($id)
+    {
+        $data['grievance'] = Grievance::findOrFail($id);
+        $data['statuses'] = ['Open','In-prograss','Rejected','Out of scope','Done'];
+        return view('edit_grievance', $data);
+    }
+
 }
