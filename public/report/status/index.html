@@ -1,44 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <title>Public Grievance Information System, Sri Lanka</title>
-        <meta
-            name="description"
-            content="Public Grievance Information System, Sri Lanka"
-        />
-        <meta name="author" content="Sampath Perera" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        <base href="/report/" />
-        <link rel="stylesheet" href="css/normalize.css" />
-        <link rel="stylesheet" href="css/skeleton.css" />
-        <link rel="stylesheet" href="css/custom.css" />
-        <link rel="icon" type="image/png" href="logo.png" />
-    </head>
+<head>
+    <meta charset="utf-8" />
+    <title>Public Grievance Information System, Sri Lanka</title>
+    <meta name="description" content="Public Grievance Information System, Sri Lanka" />
+    <meta name="author" content="Sampath Perera" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <body>
-        <div class="table-container">
-            <div class="row section-heading">
-                <div style="float: left">
-                    <img
-                        class="u-max-full-width"
-                        style="width: 64px; padding: 5px"
-                        src="logo.png"
-                        alt="Logo"
-                    />
-                </div>
-                <div>
-                    <h4>Public Grievance Information System</h4>
-                    <h4>Ministry of Public Services</h4>
-                    <h4>Sri Lanka</h4>
-                </div>
+    <base href="/report/" />
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/skeleton.css" />
+    <link rel="stylesheet" href="css/custom.css" />
+    <link rel="icon" type="image/png" href="logo.png" />
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+
+<body>
+    <div class="table-container">
+        <div class="row section-heading">
+            <div style="float: left">
+                <img class="u-max-full-width" style="width: 64px; padding: 5px" src="logo.png" alt="Logo" />
             </div>
-            <div class="contacontainer">
-                <div class="row subheading" style="margin-top: 15px">
-                    <h4 class="section-description" style="text-align: center;">Grievance Status</h4>
-                    <table class="u-full-width" style="font-size: 1.5rem;">
-                        <tbody>
+            <div>
+                <h4>Public Grievance Information System</h4>
+                <h4>Ministry of Public Services</h4>
+                <h4>Sri Lanka</h4>
+            </div>
+        </div>
+        <div class="contacontainer">
+            <div class="rating u-full-width" style="padding: 5px; display: none;">
+                <form class="rateForm" method="POST" id="grievance-form">
+                    <div style="float: left; margin-top: 8px;">Please rate your experience </div>
+                    <div class="rate">
+                        <input type="radio" id="star5" name="rate" value="5" required/>
+                        <label for="star5" title="Excellent">5 stars</label>
+                        <input type="radio" id="star4" name="rate" value="4" required/>
+                        <label for="star4" title="Very Good">4 stars</label>
+                        <input type="radio" id="star3" name="rate" value="3" required/>
+                        <label for="star3" title="Good">3 stars</label>
+                        <input type="radio" id="star2" name="rate" value="2" required/>
+                        <label for="star2" title="Poor">2 stars</label>
+                        <input type="radio" id="star1" name="rate" value="1" required/>
+                        <label for="star1" title="Very Poor">1 star</label>
+                    </div>
+                    <div class="u-full-width">
+                        <textarea class="u-full-width" name="comments" placeholder="Any comments (optional)"
+                            id="comments" spellcheck="true"></textarea>
+                    </div>
+                    <div class="row" style="padding-left: 5px">
+                        <div class="g-recaptcha" data-sitekey="6LeByH8eAAAAANx71UdKA2mC8oQYMuWXSXQxgsLJ"></div>
+                        <input type="hidden" name="uuid" id="uuid-h">
+                        <input class="button-primary" type="submit" value="Submit" />
+                    </div>
+                </form>
+            </div>
+            <img class="img-loading" src="loading.gif" />
+
+            <div class="row subheading" style="margin-top: 15px">
+                <h4 class="section-description" style="text-align: center;">Grievance Details</h4>
+
+                <table class="u-full-width" style="font-size: 1.5rem;">
+                    <tbody>
                         <tr>
                             <td class="title">Reference Number </td>
                             <td id="uuid">Loading...</td>
@@ -71,44 +94,85 @@
                             <td class="title">Last updated at </td>
                             <td id="updated_at">Loading...</td>
                         </tr>
+                        <tr>
+                            <td class="title">Files </td>
+                            <td id="file"></td>
+                        </tr>
                     </tbody>
-                    </table>
-        </div>
+                </table>
+            </div>
 
-        <footer id="footer"></footer>
-    </body>
-    <script
-        src="https://code.jquery.com/jquery-2.2.4.min.js"
-        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-        crossorigin="anonymous"
-    ></script>
-    <script>
-        let searchParams = new URLSearchParams(window.location.search);
-        var url = "";
-        var code = searchParams.get("uuid");
-        if (code) {
-            url = "/api/grievance/details/";
-        } else {
-            alert('Invalid URL');
+            <footer id="footer"></footer>
+
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"
+    integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+<script>
+    window.onload = function () {
+        var $recaptcha = document.querySelector("#g-recaptcha-response");
+        if ($recaptcha) {
+            $recaptcha.setAttribute("required", "required");
         }
+    };
 
-        if (code) {
-            $.getJSON(url + code, function (data) {
-                if (data.message == "Success") {
-                    for(const element in data.data)   {
-                        $('#'+element).html(data.data[element]);
-                    }
-                    if(data.data.sub_institution_name)  {
-                        $('#institution_name').html(data.data.sub_institution_name+',<br/>'+data.data.institution_name);
-                    }
-                } else {
-                    alert("Grievance not found. Please try again later.");
+    let searchParams = new URLSearchParams(window.location.search);
+    var url = "";
+    var code = searchParams.get("uuid");
+    if (code) {
+        url = "/api/grievance/details/";
+    } else {
+        alert('Invalid URL');
+    }
+
+    if (code) {
+        $.getJSON(url + code, function (data) {
+            if (data.message == "Success") {
+                for (const element in data.data) {
+                    $('#' + element).html(data.data[element]);
                 }
-            })
-            .fail(function() { alert("Grievance not found. Please try again later."); })
-        } else {
-            alert("Grievance not found");
-        }
+                if (data.data.sub_institution_name) {
+                    $('#institution_name').html(data.data.sub_institution_name + ',<br/>' + data.data.institution_name);
+                }
+                    for (var file of data.data.files) {
+                        var fileName = file.split('/').pop();
+                        $('#file').append("<a href='"+file+"' target='_blank' >"+fileName+"</a><br/>");
+                    }
+                if (data.data.status == 'Done') {
+                    $('.rating').show();
+                }   else    {
+                    $('.rating').html('');
+                }
+                $('#uuid-h').val(data.data.uuid);
+            } else {
+                alert("Grievance not found. Please try again later.");
+            }
+        })
+            .fail(function () { alert("Grievance not found. Please try again later."); })
+    } else {
+        alert("Grievance not found");
+    }
 
-    </script>
+    $(".rateForm").submit(function (e) {
+        e.preventDefault();
+        $(".rateForm").hide(200);
+        $.ajax({
+            type: "POST",
+            url: "/api/grievance/rate",
+            data: $('.rateForm').serialize(),
+            success: function (data) {
+                $(".rateForm").html(
+                    "Thanks for rating!"
+                );
+                $(".img-loading").hide(100);
+                $(".rateForm").show(100);
+            },
+            error: function (data) {
+                alert(data.responseJSON.message);
+                $(".img-loading").hide(100);
+                $(".rateForm").show(100);
+            },
+        });
+    });
+
+</script>
+</body>
 </html>

@@ -10,6 +10,7 @@ use App\Models\Institution;
 use App\Models\SubInstitution;
 use Illuminate\Support\Facades\DB;
 use App\Library\Mysms;
+use App\Library\FileUploader;
 
 class ApiController extends Controller
 {
@@ -23,6 +24,7 @@ class ApiController extends Controller
     public function getSubInstitution(int $id)
     {
         $subInstitution = SubInstitution::find($id);
+        $subInstitution->name = $subInstitution->name.', '.$subInstitution->institution->name;
         return $this->responseJson($subInstitution);
     }
 
@@ -33,7 +35,12 @@ class ApiController extends Controller
             ->leftJoin('institutions', 'institutions.id', 'institution_id')
             ->leftJoin('sub_institutions', 'sub_institutions.id', 'sub_institution_id')
             ->first();
-
+        $grievance = Grievance::where('uuid', $uuid)->with('files')->first();
+        $fileList = [];
+        foreach($grievance->files as $file)    {
+            $fileList[] = env('APP_URL').'/grievanceFiles/'. $file->name;
+        }
+        $data->files = $fileList;
         return $this->responseJson($data);
     }
 
@@ -62,17 +69,8 @@ class ApiController extends Controller
             $grievance->save();
 
             //handel file uploads
-            if (isset($_FILES['file']['name'])) {
-                $fileExtension = strtolower(pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION));
-                $newFileName = $grievance->id . '-' . uniqid() . '.' . $fileExtension;
-                $target_path = public_path('grievanceFiles') . "/" . basename($newFileName);
-                if (move_uploaded_file($_FILES['file']['tmp_name'], $target_path)) {
-                    $gf = new GrievanceFile();
-                    $gf->name = $newFileName;
-                    $gf->grievance_id = $grievance->id;
-                    $gf->type = $fileExtension;
-                    $gf->save();
-                }
+            if(!empty($_FILES['file'])) {
+                FileUploader::upload($_FILES['file'], $grievance->id);
             }
 
             $result = ['status' => 200, 'message' => 'Grievance successfully saved!', 'data' => ['grievanceRefNo' => $grievance->uuid]];

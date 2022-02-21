@@ -1,3 +1,9 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+.alert-success  {
+    background: aquamarine;
+    padding: 10px;
+    border-radius: 5px;
+}

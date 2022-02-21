@@ -3,7 +3,6 @@
 namespace App\Library;
 
 use InvalidArgumentException;
-use App\Model\logSms;
 use App\Models\SmsLog;
 
 class Mysms

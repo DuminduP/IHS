@@ -6,7 +6,7 @@ use App\Models\Institution;
 use App\Models\SubInstitution;
 use Illuminate\Support\Facades\DB;
 
-class InstitutionController extends Controller
+class SubInstitutionController extends Controller
 {
     public function getSubInstitutions(int $institutionId)
     {
