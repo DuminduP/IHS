@@ -28,14 +28,10 @@ class GrievanceController extends Controller
         $grievance = Grievance::findOrFail($id);
 
         $request->validate([
-            'title' => 'required|max:100',
-            'description' => 'required',
             'status' => 'required',
             'grievance_type_id' => 'required',
         ]);
 
-        $grievance->title = $request->title;
-        $grievance->description = $request->description;
         $grievance->notes = $request->notes;
         $grievance->status = $request->status;
         $grievance->grievance_type_id = $request->grievance_type_id;

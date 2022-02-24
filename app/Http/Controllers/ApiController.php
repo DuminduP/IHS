@@ -3,14 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreGrievanceRequest;
+use App\Library\FileUploader;
+use App\Library\Mysms;
 use App\Models\Grievance;
-use App\Models\GrievanceFile;
 use App\Models\GrievanceOwner;
 use App\Models\Institution;
+use App\Models\Rating;
 use App\Models\SubInstitution;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Library\Mysms;
-use App\Library\FileUploader;
 
 class ApiController extends Controller
 {
@@ -24,7 +25,7 @@ class ApiController extends Controller
     public function getSubInstitution(int $id)
     {
         $subInstitution = SubInstitution::find($id);
-        $subInstitution->name = $subInstitution->name.', '.$subInstitution->institution->name;
+        $subInstitution->name = $subInstitution->name . ', ' . $subInstitution->institution->name;
         return $this->responseJson($subInstitution);
     }
 
@@ -37,8 +38,14 @@ class ApiController extends Controller
             ->first();
         $grievance = Grievance::where('uuid', $uuid)->with('files')->first();
         $fileList = [];
-        foreach($grievance->files as $file)    {
-            $fileList[] = env('APP_URL').'/grievanceFiles/'. $file->name;
+        foreach ($grievance->files as $file) {
+            $fileList[] = env('APP_URL') . '/grievanceFiles/' . $file->name;
+        }
+        
+        $data->rated = false;
+        $isExisting = Rating::where('grievance_id', $grievance->id)->first();
+        if($isExisting) {
+            $data->rated = true;
         }
         $data->files = $fileList;
         return $this->responseJson($data);
@@ -69,7 +76,7 @@ class ApiController extends Controller
             $grievance->save();
 
             //handel file uploads
-            if(!empty($_FILES['file'])) {
+            if (!empty($_FILES['file'])) {
                 FileUploader::upload($_FILES['file'], $grievance->id);
             }
 
@@ -77,13 +84,40 @@ class ApiController extends Controller
             $mysms = new Mysms();
             $message = "Your grievace successfully created. \n";
             $message .= "Referesnce Number is $grievance->uuid \n";
-            $message .= "Visit this link for status updates ".env('QR_HOST')."/report/status/?uuid=".$grievance->uuid;
+            $message .= "Visit this link for status updates " . env('QR_HOST') . "/report/status/?uuid=" . $grievance->uuid;
             $mysms->sendSMS($request->mobile, $message);
-        } catch (\Exception $e) {
+        } catch (\Exception$e) {
             DB::rollback();
             $result = ['status' => 500, 'message' => ["Error saving record.{$e->getMessage()}"]];
             return response()->json($result, 500);
         }
+
+        return response()->json($result, 200);
+    }
+
+    public function rate(Request $request)
+    {
+        $request->validate([
+            'rate' => 'required',
+            'uuid' => 'required',
+        ]);
+        $grievance = Grievance::where('uuid',$request->uuid)->firstOrFail();
+        if($grievance->status != 'Done')    {
+            $result = ['status' => 401, 'message' => 'Grievance not closed!'];
+            return response()->json($result, 401);
+        }
+
+        $isExisting = Rating::where('grievance_id', $grievance->id)->first();
+        if($isExisting) {
+            $result = ['status' => 401, 'message' => 'Already rated'];
+            return response()->json($result, 401);
+        }  
+            $rate = new Rating();
+            $rate->grievance_id = $grievance->id;
+            $rate->rate = $request->rate;
+            $rate->comment = $request->comment;
+            $rate->save();
+            $result = ['status' => 200, 'message' => 'Rating successfully saved!'];
 
         return response()->json($result, 200);
     }

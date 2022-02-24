@@ -19,4 +19,4 @@ Route::get('/institution/{id}', [ApiController::class, 'getInstitution']);
 Route::get('/sub-institution/{id}', [ApiController::class, 'getSubInstitution']);
 Route::post('/grievance', [ApiController::class, 'saveGrievance']);
 Route::get('/grievance/details/{uuid}', [ApiController::class, 'getGrievanceByUuid']);
-Route::post('/rate', 'InstitutionController@saveRate');
+Route::post('/grievance/rate/', [ApiController::class, 'rate']);

@@ -17,7 +17,7 @@ class CreateSubInstitutions extends Migration
             $table->id();
             $table->string('name');
             $table->string('address');
-            $table->char('phone_number', 10);
+            $table->char('phone', 10);
             $table->string('email')->unique();
             $table->integer('institution_id'); 
             $table->integer('province_id'); 
