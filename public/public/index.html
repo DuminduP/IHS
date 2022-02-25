@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Public Grievance Information System, Sri Lanka</title>
+    <meta name="description" content="Public Grievance Information System, Sri Lanka" />
+    <meta name="author" content="Sampath Perera" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <base href="/public/" />
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/skeleton.css" />
+    <link rel="stylesheet" href="css/custom.css" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/public/">
+    <link rel="apple-touch-icon" sizes="180x180" href="/public/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+
+<body>
+    <div class="table-container">
+        <div class="row section-heading">
+            <div style="float: left">
+                <img class="u-max-full-width" style="width: 64px; padding: 5px" src="logo.png" alt="Logo" />
+            </div>
+            <div style="margin-top: 4px;">
+                <h4>Public Grievance Information System</h4>
+                <h4>Ministry of Public Services</h4>
+                <h4>Sri Lanka</h4>
+            </div>
+        </div>
+        <div class="contacontainer">
+            <div class="row subheading" style="margin-top: 15px">
+                <h4 class="section-description" style="font-size: 2.5rem!important; text-align: center;">New Grievance
+                </h4>
+            </div>
+            <form class="personalForm" method="POST" id="grievance-form">
+                <div class="row">
+                    <div class="personal">
+                        <div class="heading">
+                            <h6>Institution Details</h6>
+                        </div>
+
+                        <div class="row" class="six columns">
+                            <div>
+                                <select class="u-full-width" id="province_id" name="province_id" required>
+                                    <option value="">
+                                        Please select the Province
+                                    </option>
+                                    <option value="1">
+                                        Western
+                                    </option>
+                                    <option value="2">
+                                        Central
+                                    </option>
+                                    <option value="3">
+                                        Southern
+                                    </option>
+                                    <option value="4">
+                                        North Western
+                                    </option>
+                                    <option value="5">
+                                        Sabaragamuwa
+                                    </option>
+                                    <option value="6">
+                                        Eastern
+                                    </option>
+                                    <option value="7">
+                                        Uva
+                                    </option>
+                                    <option value="8">
+                                        North Central
+                                    </option>
+                                    <option value="9">
+                                        Northern
+                                    </option>
+                                </select>
+                                <select class="u-full-width" id="district_id" name="district_id" required>
+                                    <option value="">
+                                        Please select the District
+                                    </option>
+                                </select>
+                                <select class="u-full-width" id="city_id" name="city_id" required>
+                                    <option value="">
+                                        Please select the City
+                                    </option>
+                                </select>
+                                <select class="u-full-width" id="institution_id" name="institution_id" required>
+                                    <option value="">
+                                        Please select the Instiitution
+                                    </option>
+                                </select>
+                                <select class="u-full-width" id="sub_institution_id" name="sub_institution_id">
+                                    <option value="">
+                                        Please select the Sub Instiitution
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="personal">
+                        <div class="heading">
+                            <h6>Personal Details</h6>
+                        </div>
+
+                        <div class="row" class="six columns">
+                            <div>
+                                <input class="u-full-width firstLetterCapitalizeEveryWord" required type="text"
+                                    placeholder="Name" id="name" name="name" maxlength="100" pattern="[A-Za-z ]{2,100}"
+                                    autocomplete="on" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div>
+                                <input class="u-full-width firstLetterCapitalizeEveryWord" name="address" type="text"
+                                    placeholder="Address (Optional)" id="address" autocomplete="on" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="six columns" style="width: 40%">
+                                <input class="u-full-width" type="tel" name="mobile" placeholder="Mobile 07xxxxxxxx"
+                                    id="mobile" autocomplete="on" pattern="(07){1}[0-9]{8}" required />
+                            </div>
+                            <div class="six" style="width: 60%">
+                                <input class="u-full-width" style="margin-left: 2px" type="email" name="email"
+                                    placeholder="Email (Optional)" id="email" autocomplete="on" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="personal">
+                            <div class="heading">
+                                <h6>Lodge the Grievance</h6>
+                            </div>
+                            <div class="row" class="six columns">
+                                <div>
+                                    <input class="u-full-width firstLetterCapitalizeEveryWord" type="text"
+                                        placeholder="Grievance title" id="title" name="title" maxlength="200"
+                                        required />
+                                </div>
+                            </div>
+                            <div class="row" style="padding-right: 5px">
+                                <div class="six columns">
+                                    <textarea class="u-full-width" name="description"
+                                        placeholder="Grievance Description" id="description" required></textarea>
+                                </div>
+                                <div class="six columns">
+                                    <input style="width: 100%" type="file" class="button" placeholder="Upload photo"
+                                        name="fileUpload" accept="image/*,audio/*,video/*,.pdf,.doc,.docx"
+                                        id="fileUpload" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="padding-left: 5px">
+                        <div class="g-recaptcha" data-sitekey="6LeByH8eAAAAANx71UdKA2mC8oQYMuWXSXQxgsLJ"></div>
+                        <input class="button-primary" type="submit" value="Submit" />
+                    </div>
+                </div>
+            </form>
+            <img class="img-loading" src="report/loading.gif" />
+        </div>
+        <div class="table-block footer-push"></div>
+    </div>
+
+    <footer id="footer"></footer>
+</body>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"
+    integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+<script>
+    var api_url = 'http://127.0.0.1:8000/api'
+    $(document).ready(function () {
+        $('#province_id').on('change', function () {
+            var province_id = $(this).val();
+            if (province_id) {
+                $('#district_id').empty();
+                $('#district_id').append('<option value="">Loading....</option>');
+                $.ajax({
+                    url: api_url + '/districts/' + province_id,
+                    type: "GET",
+                    dataType: "json",
+                    success: function (data) {
+                        $('#district_id').empty();
+                        $('#district_id').append('<option value="">Please select the District</option>');
+                        for (row of data) {
+                            $('#district_id').append('<option value="' +
+                                row.id + '">' + row.name + '</option>');
+                        }
+
+                    }
+                });
+            } else {
+                $('#district_id').empty();
+            }
+        });
+
+        $('#district_id').on('change', function () {
+            var district_id = $(this).val();
+            if (district_id) {
+                $('#city_id').empty();
+                $('#city_id').append('<option value="">Loading....</option>');
+                $.ajax({
+                    url: api_url + '/cities/' + district_id,
+                    type: "GET",
+                    dataType: "json",
+                    success: function (data) {
+                        $('#city_id').empty();
+                        $('#city_id').append('<option value="">Please select the City</option>');
+                        for (row of data) {
+                            $('#city_id').append('<option value="' +
+                                row.id + '">' + row.name + '</option>');
+                        }
+
+                    }
+                });
+            } else {
+                $('#city_id').empty();
+            }
+        });
+
+        $('#city_id').on('change', function () {
+            var city_id = $(this).val();
+            if (city_id) {
+                $('#institution_id').empty();
+                $('#institution_id').append('<option value="">Loading....</option>');
+                $.ajax({
+                    url: api_url + '/institutions/' + city_id,
+                    type: "GET",
+                    dataType: "json",
+                    success: function (data) {
+                        $('#institution_id').empty();
+                        $('#institution_id').append('<option value="">Please select the Institution</option>');
+                        if (data != '') {
+                            for (row of data) {
+                                $('#institution_id').append('<option value="' +
+                                    row.id + '">' + row.name + '</option>');
+                            }
+                        } else {
+                            $('#institution_id').empty();
+                            $('#institution_id').append('<option value="">No institutions</option>');
+                        }
+
+                    }
+                });
+            } else {
+                $('#institution_id').empty();
+            }
+        });
+
+        $('#institution_id').on('change', function () {
+            var institution_id = $(this).val();
+            if (institution_id) {
+                $('#sub_institution_id').empty();
+                $('#sub_institution_id').append('<option value="">Loading....</option>');
+                $.ajax({
+                    url: api_url + '/sub-institutions/' + institution_id,
+                    type: "GET",
+                    dataType: "json",
+                    success: function (data) {
+                        $('#sub_institution_id').empty();
+                        $('#sub_institution_id').append('<option value="">Please select the Institution</option>');
+                        if (data != '') {
+                            for (row of data) {
+                                $('#sub_institution_id').append('<option value="' +
+                                    row.id + '">' + row.name + '</option>');
+                            }
+                        } else {
+                            $('#sub_institution_id').empty();
+                            $('#sub_institution_id').append('<option value="">No sub institutions</option>');
+                        }
+
+                    }
+                });
+            } else {
+                $('#sub_institution_id').empty();
+            }
+        });
+    });
+
+
+    $(".personalForm").submit(function (e) {
+        e.preventDefault();
+        $(".personalForm").hide(200);
+        $(".img-loading").css("display", "block");
+
+        var form = $(this);
+
+        let formData = new FormData();
+        formData.append("name", $("#name").val());
+        formData.append("address", $("#address").val());
+        formData.append("mobile", $("#mobile").val());
+        formData.append("email", $("#email").val());
+        formData.append("title", $("#title").val());
+        formData.append("description", $("#description").val());
+        formData.append("id", $("#institution_id").val());
+        formData.append("sid", $("#sub_institution_id").val());
+        formData.append("g-recaptcha-response", grecaptcha.getResponse());
+        formData.append("file", $("#fileUpload").prop("files")[0]);
+
+        $.ajax({
+            type: "POST",
+            url: api_url + "/grievance",
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: formData,
+            success: function (data) {
+                $(".personalForm").html(
+                    '<div class="alert alert-success"><h3>' +
+                    data.message +
+                    "</h3><h4> The grievance reference number is : " +
+                    data.data.grievanceRefNo +
+                    "<p>Visit following link to see the status: " +
+                    "<a href='status/?uuid=" +
+                    data.data.grievanceRefNo +
+                    "'>Check Status</a>"
+                );
+                $(".img-loading").hide(100);
+                $(".personalForm").show(100);
+            },
+            error: function (data) {
+                alert(data.responseJSON.message);
+                $(".img-loading").hide(100);
+                $(".personalForm").show(100);
+            },
+        });
+    });
+</script>
+
+</html>
