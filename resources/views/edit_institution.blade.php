@@ -1,7 +1,11 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Add Institution') }}
+            @if ($institution->id)
+                {{ __('Edit Institution') }}
+            @else
+                {{ __('Add Institution') }}
+            @endif
         </h2>
     </x-slot>
 
@@ -45,18 +49,16 @@
                 </div>
                 <div class="w-1/3 pr-2">
                     <x-label for="status" :value="__('District')" />
-                    <x-districts-dropdown id="district_id" class="block mt-1 w-full"
-                    name="district_id"
-                    :selected_id="old('district_id', $institution->district_id)"
-                    :province_id="old('province_id', $institution->province_id)" />
+                    <x-districts-dropdown id="district_id" class="block mt-1 w-full" name="district_id"
+                        :selected_id="old('district_id', $institution->district_id)"
+                        :province_id="old('province_id', $institution->province_id)" />
                 </div>
 
                 <div class="w-1/3">
                     <x-label for="status" :value="__('City')" />
-                    <x-cities-dropdown id="city_id" class="block mt-1 w-full"
-                    name="city_id"
-                    :selected_id="old('city_id', $institution->city_id)"
-                    :district_id="old('district_id', $institution->district_id)" />
+                    <x-cities-dropdown id="city_id" class="block mt-1 w-full" name="city_id"
+                        :selected_id="old('city_id', $institution->city_id)"
+                        :district_id="old('district_id', $institution->district_id)" />
                 </div>
             </div>
             <div>

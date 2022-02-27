@@ -4,9 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Province;
-use App\Models\District;
-use App\Models\City;
 
 class Institution extends Model
 {

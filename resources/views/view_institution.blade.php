@@ -12,7 +12,8 @@
 
         <div class="flex items-center justify-center" style="font-size: 20px; border-bottom: 1px dashed;">
             <h1 style="margin-right: 10px">Institution Details </h1>
-            <a href="{{ route('edit-institution', ['id' => $institution->id]) }}" title="Edit"><i class="fas fa-edit"></i></a>
+            <a href="{{ route('edit-institution', ['id' => $institution->id]) }}" title="Edit"><i class="fas fa-edit"></i></a>&nbsp;
+            <a href="{{ route('print-institution', ['id' => $institution->id]) }}" title="Print"><i class="fas fa-print"></i></a>
         </div>
         <div style="margin-top:20px">
             <x-namevalue-div :name="__('ID')" :value="$institution->id" />
@@ -25,6 +26,13 @@
             <x-namevalue-div :name="__('City')" :value="$institution->city->name" />
             <x-namevalue-div :name="__('Created At')" :value="$institution->created_at" />
             <x-namevalue-div :name="__('Updated At')" :value="$institution->updated_at" />
+                <div class="md-4 block font-medium text-lg text-gray-700" style="width:45%;float:left;margin-bottom:10px;">
+                    URL:
+                </div>
+                <div class="md-4 block font-medium text-lg text-gray-700" style="width:55%;float:left; margin-bottom:10px;">
+                   <a href="{{env('QR_HOST').'/report/?id='.$institution->id}}" target="_blank">{{env('QR_HOST').'/report/?id='.$institution->id}}</a>
+                </div>
+            <x-namevalue-div :name="__('QRcode')" :value="QrCode::size(200)->generate(env('QR_HOST').'/report/?id='.$institution->id)" />
         </div>
     </x-crm-card>
 

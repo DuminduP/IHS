@@ -21,6 +21,12 @@ class InstitutionController extends Controller
         return response()->json($subInstitution);
     }
 
+    public function getInstitutions(int $cityId)
+    {
+        $institution = Institution::select('id','name')->where('city_id', $cityId)->get();
+        return response()->json($institution);
+    }
+
     function new () {
         $data['institution'] = new Institution();
         $data['provinces'] = Province::all();
@@ -31,6 +37,11 @@ class InstitutionController extends Controller
         $data['institution'] = Institution::findOrFail($id);
         $data['provinces'] = Province::all();
         return view('view_institution', $data);
+    }
+
+    function print (int $id) {
+        $data['institution'] = Institution::findOrFail($id);
+        return view('print_institution', $data);
     }
 
     function edit (int $id) {

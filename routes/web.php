@@ -37,9 +37,17 @@ Route::get('/institution/list/', [InstitutionController::class, 'list'])->name('
 Route::get('/institution/', [InstitutionController::class, 'new'])->name('new-institution');
 Route::get('/institution/{id}', [InstitutionController::class, 'edit'])->name('edit-institution');
 Route::get('/institution/view/{id}', [InstitutionController::class, 'view'])->name('view-institution');
+Route::get('/institution/print/{id}', [InstitutionController::class, 'print'])->name('print-institution');
 Route::post('/institution/{id}', [InstitutionController::class, 'update'])->name('update-institution');
 Route::post('/institution/', [InstitutionController::class, 'store']);
 
+});
+
+Route::get('qr-code-g', function () {
+    \QrCode::size(500)
+            ->format('png')
+            ->generate('www.google.com', public_path('images/qrcode.png'));
+return view('qrCode');
 });
 
 require __DIR__.'/auth.php';

@@ -36,6 +36,8 @@
             <x-namevalue-div :name="__('Description')" :value="$grievance->description" />
             <x-namevalue-div :name="__('Notes')" :value="$grievance->notes " />
             <x-namevalue-div :name="__('Institution')" :value="$grievance->institution->name" />
+            <x-namevalue-div :name="__('Status')" :value="$grievance->status" />
+            <x-namevalue-div :name="__('Category')" :value="$grievance->category->type" />
                 @if ($grievance->sub_institution)
                     <x-namevalue-div :name="__('Sub Institution')" :value="$grievance->sub_institution->name" />
                 @endif

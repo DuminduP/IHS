@@ -33,6 +33,7 @@
                                 <td>
                                     <a href="{{route('edit-institution',['id' => $institution->id] )}}" title="Edit"><i class="fas fa-edit"></i></a> &nbsp;
                                     <a href="{{route('view-institution',['id' => $institution->id] )}}" title="View"><i class="fas fa-eye"></i></a> &nbsp;
+                                    <a href="{{route('print-institution',['id' => $institution->id] )}}" title="View"><i class="fas fa-print"></i></a>
                                 </td>
                             </tr>
                             @endforeach

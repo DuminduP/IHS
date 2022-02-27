@@ -25,6 +25,11 @@ class Grievance extends Model
         return $this->belongsTo(SubInstitution::class);
     }
 
+    public function category()
+    {
+        return $this->belongsTo(GrievanceType::class, 'grievance_type_id', 'id');
+    }
+
     public function files()
     {
         return $this->hasMany(GrievanceFile::class);

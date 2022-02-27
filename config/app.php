@@ -176,7 +176,6 @@ return [
         App\Providers\RouteServiceProvider::class,
         Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class,
         OwenIt\Auditing\AuditingServiceProvider::class,
-
     ],
 
     /*

@@ -1188,6 +1188,9 @@ select {
     padding: 10px;
     border-radius: 5px;
 }
+#dTable_length select   {
+    width: 60px!important;
+}
 .hover\:border-gray-300:hover {
   --tw-border-opacity: 1;
   border-color: rgb(209 213 219 / var(--tw-border-opacity));

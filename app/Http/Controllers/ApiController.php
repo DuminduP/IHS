@@ -84,7 +84,7 @@ class ApiController extends Controller
             $mysms = new Mysms();
             $message = "Your grievace successfully created. \n";
             $message .= "Referesnce Number is $grievance->uuid \n";
-            $message .= "Visit this link for status updates " . env('QR_HOST') . "/report/status/?uuid=" . $grievance->uuid;
+            $message .= "Visit this link for status updates " . env('QR_HOST') . "/public/status/?uuid=" . $grievance->uuid;
             $mysms->sendSMS($request->mobile, $message);
         } catch (\Exception$e) {
             DB::rollback();
