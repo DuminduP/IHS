@@ -20,7 +20,33 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
-        return view('auth.register');
+        $data['user'] = new User();
+        return view('auth.register', $data);
+    }
+
+    public function edit(int $id)
+    {
+        $data['user'] =  User::FindorFail($id);
+        return view('auth.register', $data);
+    }
+
+    public function update(int $id, Request $request)
+    {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'mobile' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255'],
+        ]);
+        $user =  User::FindorFail($id);
+        $user->name = $request->name;
+        $user->mobile = $request->mobile;
+        $user->email = $request->email;
+        $user->status = $request->status;
+        $user->role_id = $request->role_id;
+        $user->institution_id = $request->institution_id;
+        $user->save();
+
+        return redirect()->route('list-staff')->with('status', 'User updated!');
     }
 
     /**
@@ -35,6 +61,7 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
+            'mobile' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
@@ -42,17 +69,15 @@ class RegisteredUserController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'role_id' => 1,
-            'institution_id' => 1,
-            'status' => 1,
-            'mobile' => 1,
+            'role_id' => $request->role_id,
+            'institution_id' => $request->institution_id,
+            'status' => $request->status,
+            'mobile' => $request->mobile,
             'password' => Hash::make($request->password),
         ]);
 
         event(new Registered($user));
 
-        Auth::login($user);
-
-        return redirect('/');
+        return redirect()->route('list-staff')->with('status', 'New user Added!');
     }
 }

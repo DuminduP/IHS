@@ -7,6 +7,8 @@ use App\Http\Controllers\GrievanceController;
 use App\Http\Controllers\GrievanceOwnerController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\SubInstitutionController;
+use App\Http\Controllers\StaffController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +42,11 @@ Route::get('/institution/view/{id}', [InstitutionController::class, 'view'])->na
 Route::get('/institution/print/{id}', [InstitutionController::class, 'print'])->name('print-institution');
 Route::post('/institution/{id}', [InstitutionController::class, 'update'])->name('update-institution');
 Route::post('/institution/', [InstitutionController::class, 'store']);
+
+Route::get('/staff/list/', [StaffController::class, 'list'])->name('list-staff');
+Route::get('/staff/edit/{id}', [RegisteredUserController::class, 'edit'])->name('edit-staff');
+Route::post('/staff/edit/{id}', [RegisteredUserController::class, 'update']);
+
 
 });
 
