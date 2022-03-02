@@ -2,7 +2,7 @@
     <x-auth-card>
         <x-slot name="logo">
             <a href="/">
-                <img src="/logo.png" alt="logo" />
+                <img src="{{ env('APP_URL') }}/logo.png" alt="logo" />
             </a>
         </x-slot>
         <h2 style="text-align: center; font-size: 20px;">Grievance Information System</h2>
