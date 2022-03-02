@@ -9,6 +9,7 @@ use App\Http\Controllers\LocationController;
 use App\Http\Controllers\SubInstitutionController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\RatingsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 Route::middleware(['auth'])->group(function () {
 
 Route::get('/', [DashboardController::class, 'dashboard'])->name('dashboard');
+Route::get('/grievance/list', [GrievanceController::class, 'list'])->name('list-grievanse');
 Route::get('/grievance/view/{id}', [GrievanceController::class, 'view'])->name('view-grievanse');
 Route::get('/grievance/edit/{id}', [GrievanceController::class, 'edit'])->name('edit-grievanse');
 Route::post('/grievance/edit/{id}', [GrievanceController::class, 'store']);
@@ -47,7 +49,7 @@ Route::get('/staff/list/', [StaffController::class, 'list'])->name('list-staff')
 Route::get('/staff/edit/{id}', [RegisteredUserController::class, 'edit'])->name('edit-staff');
 Route::post('/staff/edit/{id}', [RegisteredUserController::class, 'update']);
 
-
+Route::get('/ratings/list/', [RatingsController::class, 'list'])->name('list-ratings');
 });
 
 Route::get('qr-code-g', function () {

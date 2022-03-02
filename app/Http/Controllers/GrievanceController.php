@@ -10,6 +10,12 @@ use App\Library\FileUploader;
 class GrievanceController extends Controller
 {
 
+    public function list()
+    {
+        $data['grievances'] = Grievance::all();
+        return view('list_grievances', $data);
+    }
+
     public function view($id)
     {
         $data['grievance'] = Grievance::findOrFail($id);

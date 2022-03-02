@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreInstitutionRequest;
 use App\Models\User;
 
 class StaffController extends Controller
