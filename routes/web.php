@@ -25,6 +25,7 @@ use App\Http\Controllers\RatingsController;
 Route::middleware(['auth'])->group(function () {
 
 Route::get('/', [DashboardController::class, 'dashboard'])->name('dashboard');
+Route::get('/grievance/list', [GrievanceController::class, 'list'])->name('list-grievanse');
 Route::get('/grievance/view/{id}', [GrievanceController::class, 'view'])->name('view-grievanse');
 Route::get('/grievance/edit/{id}', [GrievanceController::class, 'edit'])->name('edit-grievanse');
 Route::post('/grievance/edit/{id}', [GrievanceController::class, 'store']);
