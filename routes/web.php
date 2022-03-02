@@ -9,6 +9,7 @@ use App\Http\Controllers\LocationController;
 use App\Http\Controllers\SubInstitutionController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\RatingsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,7 +48,7 @@ Route::get('/staff/list/', [StaffController::class, 'list'])->name('list-staff')
 Route::get('/staff/edit/{id}', [RegisteredUserController::class, 'edit'])->name('edit-staff');
 Route::post('/staff/edit/{id}', [RegisteredUserController::class, 'update']);
 
-
+Route::get('/ratings/list/', [RatingsController::class, 'list'])->name('list-ratings');
 });
 
 Route::get('qr-code-g', function () {

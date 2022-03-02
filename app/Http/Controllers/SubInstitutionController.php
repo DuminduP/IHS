@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Institution;
 use App\Models\SubInstitution;
-use Illuminate\Support\Facades\DB;
 
 class SubInstitutionController extends Controller
 {
