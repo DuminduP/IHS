@@ -85,7 +85,7 @@
                     if (province_id) {
                         $('#district_id').empty();
                         $.ajax({
-                            url: '/districts/' + province_id,
+                            url: '{{ env('APP_URL') }}/districts/' + province_id,
                             type: "GET",
                             dataType: "json",
                             success: function(data) {
@@ -106,7 +106,7 @@
                     if (district_id) {
                         $('#city_id').empty();
                         $.ajax({
-                            url: '/cities/' + district_id,
+                            url: '{{ env('APP_URL') }}/cities/' + district_id,
                             type: "GET",
                             dataType: "json",
                             success: function(data) {
