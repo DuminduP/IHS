@@ -14112,8 +14112,9 @@ label,
   width: 64px;
   height: 64px; }
   .icon-lg i {
-    top: 31%;
-    font-size: 1.5rem; }
+    top: 25%;
+    font-size: 2rem;
+    }
   .icon-lg.icon-striped {
     background-position-x: 111px;
     background-position-y: 111px; }
