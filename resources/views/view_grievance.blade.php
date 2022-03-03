@@ -37,7 +37,7 @@
             <x-namevalue-div :name="__('Notes')" :value="$grievance->notes " />
             <x-namevalue-div :name="__('Institution')" :value="$grievance->institution->name" />
             <x-namevalue-div :name="__('Status')" :value="$grievance->status" />
-            <x-namevalue-div :name="__('Category')" :value="$grievance->category->type" />
+            <x-namevalue-div :name="__('Category')" :value="$grievance->category?->type" />
                 @if ($grievance->sub_institution)
                     <x-namevalue-div :name="__('Sub Institution')" :value="$grievance->sub_institution->name" />
                 @endif
@@ -49,7 +49,7 @@
                 </div>
                 <div class="md-4 block font-medium text-lg text-gray-700" style="width:55%;float:left; margin-bottom:10px;">
                     @foreach ($grievance->files as $file)
-                        <a href="/grievanceFiles/{{$file->name}}" target="_blank" style="color: #00f">{{$file->name}}</a></br/>
+                        <a href="{{ asset('/grievanceFiles/').'/'.$file->name }}" target="_blank" style="color: #00f">{{$file->name}}</a></br/>
                     @endforeach
                 </div>
                 @endif

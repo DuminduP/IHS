@@ -75,6 +75,10 @@ class ApiController extends Controller
             $grievance->uuid = $grievance->getUuid();
             $grievance->save();
 
+            //update the grievance_id on the owner
+            $owner->grievance_id = $grievance->id;
+            $owner->save();
+
             //handel file uploads
             if (!empty($_FILES['file'])) {
                 FileUploader::upload($_FILES['file'], $grievance->id);
@@ -84,7 +88,7 @@ class ApiController extends Controller
             $mysms = new Mysms();
             $message = "Your grievace successfully created. \n";
             $message .= "Referesnce Number is $grievance->uuid \n";
-            $message .= "Visit this link for status updates " . env('QR_HOST') . "/public/status/?uuid=" . $grievance->uuid;
+            $message .= "Visit this link for status updates " . env('QR_HOST') . "/status/?uuid=" . $grievance->uuid;
             $mysms->sendSMS($request->mobile, $message);
         } catch (\Exception$e) {
             DB::rollback();

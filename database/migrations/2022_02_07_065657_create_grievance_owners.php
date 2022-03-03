@@ -15,7 +15,7 @@ class CreateGrievanceOwners extends Migration
     {
         Schema::create('grievance_owners', function (Blueprint $table) {
             $table->id();
-            $table->integer('grievance_id');
+            $table->integer('grievance_id')->nullable();
             $table->string('name');
             $table->string('address')->nullable();
             $table->char('mobile', 10);

@@ -51,7 +51,7 @@ class GrievanceController extends Controller
         if($grievance->status == 'Done')    {
             $mysms = new Mysms();
             $message = "Your grievace $grievance->uuid was closed. \n";
-            $message .= "Visit this link to give your feedback ".env('QR_HOST')."/report/status/?uuid=".$grievance->uuid;
+            $message .= "Visit this link to give your feedback ".env('QR_HOST')."/status/?uuid=".$grievance->uuid;
             $mysms->sendSMS($grievance->owner->mobile, $message);
         }
 

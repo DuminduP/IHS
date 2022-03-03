@@ -10,7 +10,7 @@ class DashboardController extends Controller
 
     public function dashboard()
     {
-        $data['grievances'] = Grievance::all();
+        $data['grievances_count'] = Grievance::all()->count();
         return view('dashboard', $data);
     }
 

@@ -4,17 +4,16 @@
 <head>
     <meta charset="utf-8" />
     <title>Public Grievance Information System, Sri Lanka</title>
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
     <meta name="description" content="Public Grievance Information System, Sri Lanka" />
     <meta name="author" content="Sampath Perera" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <base href="/public/report/" />
-    <link rel="stylesheet" href="/public/css/normalize.css" />
-    <link rel="stylesheet" href="/public/css/skeleton.css" />
-    <link rel="stylesheet" href="/public/css/custom.css" />
+    <link rel="stylesheet" href="../css/normalize.css" />
+    <link rel="stylesheet" href="../css/skeleton.css" />
+    <link rel="stylesheet" href="../css/custom.css" />
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 
@@ -22,7 +21,7 @@
     <div class="table-container">
         <div class="row section-heading">
             <div style="float: left">
-                <img class="u-max-full-width" style="width: 64px; padding: 5px" src="logo.png" alt="Logo" />
+                <img class="u-max-full-width" style="width: 64px; padding: 5px" src="../logo.png" alt="Logo" />
             </div>
             <div style="margin-top: 4px;">
                 <h4>Public Grievance Information System</h4>
@@ -49,7 +48,7 @@
                             <div>
                                 <input class="u-full-width firstLetterCapitalizeEveryWord" required type="text"
                                     placeholder="Name" id="name" name="name" maxlength="100" pattern="[A-Za-z ]{2,100}"
-                                    autocomplete="on" />
+                                    autocomplete="on"  title="Only characters and spaces allowed"/>
                             </div>
                         </div>
                         <div class="row">
@@ -102,7 +101,7 @@
                     </div>
                 </div>
             </form>
-            <img class="img-loading" src="loading.gif" />
+            <img class="img-loading" src="../loading.gif" />
         </div>
         <div class="table-block footer-push"></div>
     </div>
@@ -120,13 +119,13 @@
     };
 
     let searchParams = new URLSearchParams(window.location.search);
-    var url = "";
+    var api_base_url = "http://localhost/IHS/public";
     var code = searchParams.get("id");
     if (code) {
-        url = "/api/institution/";
+        url = api_base_url+"/api/institution/";
     } else {
         code = searchParams.get("sid");
-        url = "/api/sub-institution/";
+        url = api_base_url+"/api/sub-institution/";
     }
 
     if (code) {
@@ -167,7 +166,7 @@
 
         $.ajax({
             type: "POST",
-            url: "/api/grievance",
+            url: api_base_url+"/api/grievance",
             cache: false,
             contentType: false,
             processData: false,
@@ -179,7 +178,7 @@
                     "</h3><h4> The grievance reference number is : " +
                     data.data.grievanceRefNo +
                     "<p>Visit following link to see the status: " +
-                    "<a href='status/?uuid=" +
+                    "<a href='../status/?uuid=" +
                     data.data.grievanceRefNo +
                     "'>Check Status</a>"
                 );

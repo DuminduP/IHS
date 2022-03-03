@@ -8,11 +8,10 @@
     <meta name="author" content="Sampath Perera" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <base href="/public/" />
-    <link rel="stylesheet" href="css/normalize.css" />
-    <link rel="stylesheet" href="css/skeleton.css" />
-    <link rel="stylesheet" href="css/custom.css" />
-    <link rel="icon" type="image/png" href="logo.png" />
+    <link rel="stylesheet" href="../css/normalize.css" />
+    <link rel="stylesheet" href="../css/skeleton.css" />
+    <link rel="stylesheet" href="../css/custom.css" />
+    <link rel="icon" type="image/png" href="../logo.png" />
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 
@@ -20,7 +19,7 @@
     <div class="table-container">
         <div class="row section-heading">
             <div style="float: left">
-                <img class="u-max-full-width" style="width: 64px; padding: 5px" src="logo.png" alt="Logo" />
+                <img class="u-max-full-width" style="width: 64px; padding: 5px" src="../logo.png" alt="Logo" />
             </div>
             <div>
                 <h4>Public Grievance Information System</h4>
@@ -54,7 +53,7 @@
                         <input class="button-primary" type="submit" value="Submit" />
                     </div>
                 </form>
-                <img class="img-loading" src="loading.gif" />
+                <img class="img-loading" src="../loading.gif" />
             </div>
 
             <div class="row subheading" style="margin-top: 15px">
@@ -115,10 +114,10 @@
     };
 
     let searchParams = new URLSearchParams(window.location.search);
-    var url = "";
+    var api_base_url = "http://localhost/IHS/public";
     var code = searchParams.get("uuid");
     if (code) {
-        url = "/api/grievance/details/";
+        url = api_base_url+"/api/grievance/details/";
     } else {
         alert('Invalid URL');
     }
@@ -157,7 +156,7 @@
         $(".img-loading").show(100);
         $.ajax({
             type: "POST",
-            url: "/api/grievance/rate",
+            url: api_base_url+"/api/grievance/rate",
             data: $('.rateForm').serialize(),
             success: function (data) {
                 $(".rateForm").html(

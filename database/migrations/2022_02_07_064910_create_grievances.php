@@ -21,7 +21,7 @@ class CreateGrievances extends Migration
             $table->text('notes')->nullable();;
             $table->integer('institution_id');
             $table->integer('sub_institution_id')->nullable();
-            $table->integer('grievance_type_id');
+            $table->integer('grievance_type_id')->nullable();
             $table->integer('grievance_owner_id');
             $table->enum('status', ['Open', 'In-prograss', 'Rejected', 'Out of scope', 'Done']);
             $table->timestamps();

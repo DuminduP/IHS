@@ -82,7 +82,7 @@
     <div class="content">
         <div class="logo">
             <button class="print-btn" onclick="window.print();">Print</button>
-            <img src="/images/logo.png" alt="Logo" style="margin: auto">
+            <img src="{{ asset('/logo.png') }}" alt="Logo" style="margin: auto">
             <h1 style="margin-bottom: 0px">GIHS - 1717</h1>
         </div>
         <div style="padding-top: 10px">
