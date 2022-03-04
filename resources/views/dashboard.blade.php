@@ -142,13 +142,9 @@
                 </div>
               </div>
               <div class="card-body">
-                <h6 class="mb-0 "> Daily Sales </h6>
-                <p class="text-sm "> (<span class="font-weight-bolder">+15%</span>) increase in today sales. </p>
+                <h6 class="mb-0 "> Monthly New Grievances </h6>
+                <p class="text-sm "> Number of New Grievances by Month </p>
                 <hr class="dark horizontal">
-                <div class="d-flex ">
-                  <i class="material-icons text-sm my-auto me-1">schedule</i>
-                  <p class="mb-0 text-sm"> updated 4 min ago </p>
-                </div>
               </div>
             </div>
           </div>
@@ -162,13 +158,9 @@
                 </div>
               </div>
               <div class="card-body">
-                <h6 class="mb-0 ">Completed Tasks</h6>
-                <p class="text-sm ">Last Campaign Performance</p>
+                <h6 class="mb-0 "> Monthly Completed Grievances</h6>
+                <p class="text-sm ">Number of Completed Grievances by Month</p>
                 <hr class="dark horizontal">
-                <div class="d-flex ">
-                  <i class="material-icons text-sm my-auto me-1">schedule</i>
-                  <p class="mb-0 text-sm">just updated</p>
-                </div>
               </div>
             </div>
           </div>
@@ -637,15 +629,15 @@
       new Chart(ctx, {
         type: "bar",
         data: {
-          labels: ["M", "T", "W", "T", "F", "S", "S"],
+          labels: {!! json_encode(array_keys($grievances_weekly)) !!},
           datasets: [{
-            label: "Sales",
+            label: "Grievances",
             tension: 0.4,
             borderWidth: 0,
             borderRadius: 4,
             borderSkipped: false,
             backgroundColor: "rgba(255, 255, 255, .8)",
-            data: [50, 20, 10, 22, 50, 10, 40],
+            data: {!! json_encode(array_values($grievances_weekly)) !!},
             maxBarThickness: 6
           }, ],
         },
@@ -718,9 +710,9 @@
       new Chart(ctx2, {
         type: "line",
         data: {
-          labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+          labels: {!! json_encode(array_keys($grievances_new_monthly)) !!},
           datasets: [{
-            label: "Mobile apps",
+            label: "Grievances",
             tension: 0,
             borderWidth: 0,
             pointRadius: 5,
@@ -731,7 +723,7 @@
             borderWidth: 4,
             backgroundColor: "transparent",
             fill: true,
-            data: [50, 40, 300, 320, 500, 350, 200, 230, 500],
+            data: {!! json_encode(array_values($grievances_new_monthly)) !!},
             maxBarThickness: 6
 
           }],
@@ -801,7 +793,7 @@
       new Chart(ctx3, {
         type: "line",
         data: {
-          labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+          labels: {!! json_encode(array_keys($grievances_done_monthly)) !!},
           datasets: [{
             label: "Mobile apps",
             tension: 0,
@@ -813,7 +805,7 @@
             borderWidth: 4,
             backgroundColor: "transparent",
             fill: true,
-            data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
+            data: {!! json_encode(array_values($grievances_done_monthly)) !!},
             maxBarThickness: 6
 
           }],
