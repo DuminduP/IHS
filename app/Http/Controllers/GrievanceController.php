@@ -55,6 +55,6 @@ class GrievanceController extends Controller
             $mysms->sendSMS($grievance->owner->mobile, $message);
         }
 
-        return redirect()->route('dashboard')->with('status', 'Grievance updated!');
+        return redirect()->route('list-grievanse')->with('status', 'Grievance updated!');
     }
 }

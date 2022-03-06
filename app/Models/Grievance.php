@@ -3,7 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class Grievance extends Model
@@ -14,6 +16,20 @@ class Grievance extends Model
         'created_at' => 'datetime:Y-m-d H:i',
         'updated_at' => 'datetime:Y-m-d H:i',
     ];
+
+    /**
+     * The "booted" method of the model.
+     *
+     * @return void
+     */
+    protected static function booted()
+    {
+        static::addGlobalScope('ancient', function (Builder $builder) {
+            if(Auth::user() && Auth::user()->role_id != 1)  {
+                $builder->where('institution_id', Auth::user()->institution_id);
+            }
+        });
+    }
 
     public function institution()
     {
@@ -40,7 +56,8 @@ class Grievance extends Model
         return $this->belongsTo(GrievanceOwner::class, 'grievance_owner_id');
     }
 
-    public function getUuid()   {
+    public function getUuid()
+    {
         $unique = strtoupper(str::random(6));
 
         $check = Model::where('uuid', $unique)->first();
@@ -51,5 +68,4 @@ class Grievance extends Model
 
         return $unique;
     }
-
 }

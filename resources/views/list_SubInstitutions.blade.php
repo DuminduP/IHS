@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight w-1/3">
-            {{ __('Institutions') }}
+            {{ __('SubInstitutions') }}
         </h2>
         @if (session('status'))
             <x-alert>
@@ -10,7 +10,7 @@
         @endif
         @if(Auth::user()->role_id == 1)
         <div style="float: right; margin-top:-10px;">
-            <a href="{{route('new-institution')}}" title="New Institution" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">New Institution</i></a>
+            <a href="{{route('new-sub-institution')}}" title="New SubInstitution" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">New Sub-Institution</i></a>
         </div>
         @endif
     </x-slot>
@@ -24,20 +24,20 @@
                             <tr><th>ID</th><th>Name</th><th>Phone</th><th>City</th><th>District</th><th>Province</th><th>Actions</th></tr>
                         </thead>
                         <tbody>
-                            @foreach ($institutions as $institution)   
+                            @foreach ($SubInstitutions as $SubInstitution)   
                             <tr>
-                                <td>{{$institution->id}}</td>
-                                <td>{{$institution->name}}</td>
-                                <td>{{$institution->phone}}</td>
-                                <td>{{$institution->city->name}}</td>
-                                <td>{{$institution->district->name}}</td>
-                                <td>{{$institution->province->name}}</td>
+                                <td>{{$SubInstitution->id}}</td>
+                                <td>{{$SubInstitution->name}}</td>
+                                <td>{{$SubInstitution->phone}}</td>
+                                <td>{{$SubInstitution->city->name}}</td>
+                                <td>{{$SubInstitution->district->name}}</td>
+                                <td>{{$SubInstitution->province->name}}</td>
                                 <td>
                                 @if(Auth::user()->role_id == 1)
-                                    <a href="{{route('edit-institution',['id' => $institution->id] )}}" title="Edit"><i class="fas fa-edit"></i></a> &nbsp;
+                                    <a href="{{route('edit-sub-institution',['id' => $SubInstitution->id] )}}" title="Edit"><i class="fas fa-edit"></i></a> &nbsp;
                                 @endif
-                                    <a href="{{route('view-institution',['id' => $institution->id] )}}" title="View"><i class="fas fa-eye"></i></a> &nbsp;
-                                    <a href="{{route('print-institution',['id' => $institution->id] )}}" title="View"><i class="fas fa-print"></i></a>
+                                    <a href="{{route('view-sub-institution',['id' => $SubInstitution->id] )}}" title="View"><i class="fas fa-eye"></i></a> &nbsp;
+                                    <a href="{{route('print-sub-institution',['id' => $SubInstitution->id] )}}" title="View"><i class="fas fa-print"></i></a>
                                 </td>
                             </tr>
                             @endforeach

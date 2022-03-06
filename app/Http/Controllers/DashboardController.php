@@ -20,6 +20,8 @@ class DashboardController extends Controller
         $data['grievances_weekly'] = $this->getWeeklyCount($all);
         $data['grievances_new_monthly'] = $this->getMonthlyCount($all);
         $data['grievances_done_monthly'] = $this->getMonthlyCount($done);
+        $data['grievances_category'] = $this->getCategoryPercent($all);
+        $data['grievances_status'] = $this->getStatusPercent($all);
        
         return view('dashboard', $data);
     }
@@ -42,5 +44,38 @@ class DashboardController extends Controller
         return $week;
     }
    
+    private function getCategoryPercent(Collection $grievances): array
+    {
+        $cat = [];
+        foreach($grievances as $grievance)  {
+            if($grievance->grievance_type_id > 0)   {
+                if(!isset($cat[$grievance->category->type])) {
+                    $cat[$grievance->category->type] = 0;
+                }
+                $cat[$grievance->category->type] += 1;
+            }
+        }
+        $sum = array_sum($cat);
+        foreach($cat as &$ct)    {
+            $ct = round(($ct/$sum)*100);
+        }
+        return $cat;
+    }
+   
+    private function getStatusPercent(Collection $grievances): array
+    {
+        $cat = [];
+        foreach($grievances as $grievance)  {
+                if(!isset($cat[$grievance->status])) {
+                    $cat[$grievance->status] = 0;
+                }
+                $cat[$grievance->status] += 1;
+        }
+        $sum = array_sum($cat);
+        foreach($cat as &$ct)    {
+            $ct = round(($ct/$sum)*100);
+        }
+        return $cat;
+    }
 
 }

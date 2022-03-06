@@ -9,7 +9,9 @@
             </x-alert>
         @endif
         <div style="float: right; margin-top:-10px;">
+        @if(Auth::user()->role_id == 1)
             <a href="{{route('register')}}" title="New Institution" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">New Staff</i></a>
+        @endif
         </div>
     </x-slot>
 
@@ -32,7 +34,9 @@
                                 <td>{{$staff->status}}</td>
                                 <td>{{$staff->institution?->name}}</td>
                                 <td>
+                                @if(Auth::user()->role_id == 1)
                                     <a href="{{route('edit-staff',['id' => $staff->id] )}}" title="Edit"><i class="fas fa-edit"></i></a> &nbsp;
+                                @endif
                                 </td>
                             </tr>
                             @endforeach

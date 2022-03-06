@@ -18,7 +18,7 @@ class CreateInstitutions extends Migration
             $table->string('name');
             $table->string('address');
             $table->char('phone', 10);
-            $table->string('email')->unique();
+            $table->string('email')->nullable();
             $table->integer('province_id'); 
             $table->integer('district_id'); 
             $table->integer('city_id'); 

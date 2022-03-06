@@ -45,6 +45,14 @@ Route::get('/institution/print/{id}', [InstitutionController::class, 'print'])->
 Route::post('/institution/{id}', [InstitutionController::class, 'update'])->name('update-institution');
 Route::post('/institution/', [InstitutionController::class, 'store']);
 
+Route::get('/sub-institution/list/', [SubInstitutionController::class, 'list'])->name('list-sub-institutions');
+Route::get('/sub-institution/', [SubInstitutionController::class, 'new'])->name('new-sub-institution');
+Route::get('/sub-institution/{id}', [SubInstitutionController::class, 'edit'])->name('edit-sub-institution');
+Route::get('/sub-institution/view/{id}', [SubInstitutionController::class, 'view'])->name('view-sub-institution');
+Route::get('/sub-institution/print/{id}', [SubInstitutionController::class, 'print'])->name('print-sub-institution');
+Route::post('/sub-institution/{id}', [SubInstitutionController::class, 'update'])->name('update-sub-institution');
+Route::post('/sub-institution/', [SubInstitutionController::class, 'store']);
+
 Route::get('/staff/list/', [StaffController::class, 'list'])->name('list-staff');
 Route::get('/staff/edit/{id}', [RegisteredUserController::class, 'edit'])->name('edit-staff');
 Route::post('/staff/edit/{id}', [RegisteredUserController::class, 'update']);
