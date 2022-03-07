@@ -166,7 +166,7 @@
           </div>
         </div>
         <div class="row mb-4">
-          <div class="card col-lg-6 col-md-6 mb-md-0 mb-4">
+          <div class="card col-lg-4 col-md-4 mb-md-0 mb-4">
               <div class="card-header pb-0">
                 <div class="row">
                   <div class="col-lg-6 col-7">
@@ -178,7 +178,7 @@
                   <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
                     <div class="bg-gradient-info shadow-dark border-radius-lg py-3 pe-1">
                       <div class="chart">
-                        <canvas id="chart-categories" class="chart-canvas" height="340"></canvas>
+                        <canvas id="chart-categories" class="chart-canvas" height="240"></canvas>
                       </div>
                     </div>
                   </div>
@@ -186,7 +186,7 @@
               </div>
             </div>
           </div>
-          <div class="card col-lg-6 col-md-6 mb-md-0 mb-4">
+          <div class="card col-lg-4 col-md-4 mb-md-0 mb-4">
               <div class="card-header pb-0">
                 <div class="row">
                   <div class="col-lg-6 col-7">
@@ -198,7 +198,28 @@
                   <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
                     <div class="bg-gradient-success shadow-dark border-radius-lg py-3 pe-1">
                       <div class="chart">
-                        <canvas id="chart-status" class="chart-canvas" height="340"></canvas>
+                        <canvas id="chart-status" class="chart-canvas" height="240"></canvas>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card col-lg-4 col-md-4 mb-md-0 mb-4">
+              <div class="card-header pb-0">
+                <div class="row">
+                  <div class="col-lg-6 col-7">
+                    <h6>Grievance Location %</h6>
+                  </div>
+              </div>
+              <div class="card-body px-0 pb-2">
+                <div class="card z-index-2 ">
+                  <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
+                    <div class="bg-gradient-warning shadow-dark border-radius-lg py-3 pe-1">
+                      <div class="chart">
+                        <canvas id="chart-location" class="chart-canvas" height="240"></canvas>
                       </div>
                     </div>
                   </div>
@@ -520,6 +541,28 @@
               'rgb(105, 105, 106)',
             ],
             data: {!! json_encode(array_values($grievances_status)) !!},
+            hoverOffset: 4
+          }],
+        },
+      });
+
+      var ctx6 = document.getElementById("chart-location").getContext("2d");
+
+      new Chart(ctx6, {
+        type: "pie",
+        data: {
+          labels: {!! json_encode(array_keys($grievances_district)) !!},
+          datasets: [{
+            label: "Grievances",
+            backgroundColor: [
+              'rgb(255, 99, 132)',
+              'rgb(54, 162, 235)',
+              'rgb(255, 205, 86)',
+              'rgb(255, 255, 86)',
+              'rgb(155, 205, 186)',
+              'rgb(105, 105, 106)',
+            ],
+            data: {!! json_encode(array_values($grievances_district)) !!},
             hoverOffset: 4
           }],
         },
