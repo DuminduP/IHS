@@ -10,6 +10,8 @@ use App\Http\Controllers\SubInstitutionController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\RatingsController;
+use App\Http\Controllers\ReportController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -58,13 +60,10 @@ Route::get('/staff/edit/{id}', [RegisteredUserController::class, 'edit'])->name(
 Route::post('/staff/edit/{id}', [RegisteredUserController::class, 'update']);
 
 Route::get('/ratings/list/', [RatingsController::class, 'list'])->name('list-ratings');
-});
 
-Route::get('qr-code-g', function () {
-    \QrCode::size(500)
-            ->format('png')
-            ->generate('www.google.com', public_path('images/qrcode.png'));
-return view('qrCode');
+Route::get('/reports/category/', [ReportController::class, 'category'])->name('report-category');
+Route::get('/reports/status/', [ReportController::class, 'status'])->name('report-status');
+Route::get('/reports/location/', [ReportController::class, 'location'])->name('report-location');
 });
 
 require __DIR__.'/auth.php';

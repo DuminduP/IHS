@@ -165,68 +165,68 @@
             </div>
           </div>
         </div>
-        <div class="row mb-4">
-          <div class="card col-lg-4 col-md-4 mb-md-0 mb-4">
+        <div class="row mt-4">
+        <div class="col-lg-4 mt-4 mb-3">
+          <div class="card">
               <div class="card-header pb-0">
                 <div class="row">
                   <div class="col-lg-6 col-7">
-                    <h6>Grievance Categories %</h6>
+                    <h6><a href="{{route('report-category')}}">Grievance Categories %</a></h6>
                   </div>
               </div>
               <div class="card-body px-0 pb-2">
                 <div class="card z-index-2 ">
-                  <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
                     <div class="bg-gradient-info shadow-dark border-radius-lg py-3 pe-1">
                       <div class="chart">
                         <canvas id="chart-categories" class="chart-canvas" height="240"></canvas>
                       </div>
                     </div>
-                  </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="card col-lg-4 col-md-4 mb-md-0 mb-4">
+        </div>
+        <div class="col-lg-4 mt-4 mb-3">
+          <div class="card">
               <div class="card-header pb-0">
                 <div class="row">
                   <div class="col-lg-6 col-7">
-                    <h6>Grievance Status %</h6>
+                    <h6><a href="{{route('report-status')}}">Grievance Status %</a></h6>
                   </div>
               </div>
               <div class="card-body px-0 pb-2">
                 <div class="card z-index-2 ">
-                  <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
                     <div class="bg-gradient-success shadow-dark border-radius-lg py-3 pe-1">
                       <div class="chart">
                         <canvas id="chart-status" class="chart-canvas" height="240"></canvas>
                       </div>
                     </div>
-                  </div>
                 </div>
               </div>
             </div>
           </div>
+        </div>
 
-          <div class="card col-lg-4 col-md-4 mb-md-0 mb-4">
+        <div class="col-lg-4 mt-4 mb-3">
+          <div class="card">
               <div class="card-header pb-0">
                 <div class="row">
                   <div class="col-lg-6 col-7">
-                    <h6>Grievance Location %</h6>
+                    <h6><a href="{{route('report-location')}}">Grievance Location %</a></h6>
                   </div>
               </div>
               <div class="card-body px-0 pb-2">
                 <div class="card z-index-2 ">
-                  <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
                     <div class="bg-gradient-warning shadow-dark border-radius-lg py-3 pe-1">
                       <div class="chart">
                         <canvas id="chart-location" class="chart-canvas" height="240"></canvas>
                       </div>
-                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+        </div>
          
         </div>
         <footer class="footer py-4  ">

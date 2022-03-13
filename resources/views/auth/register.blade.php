@@ -1,7 +1,11 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Add Staff Member') }}
+            @if($user->name)
+                {{ __('Edit Staff Member') }}
+            @else
+                {{ __('Add Staff Member') }}
+            @endif
         </h2>
     </x-slot>
 
@@ -85,7 +89,7 @@
                 </div>
                 <div class="ml-3">
                     <x-button class="ml-3">
-                        {{ __('Update') }}
+                        {{ __('Save') }}
                     </x-button>
                 </div>
 
