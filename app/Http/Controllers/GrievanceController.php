@@ -10,9 +10,15 @@ use App\Library\FileUploader;
 class GrievanceController extends Controller
 {
 
-    public function list()
+    public function list($status=0)
     {
-        $data['grievances'] = Grievance::all();
+        if(empty($status))  {
+            $data['grievances'] = Grievance::all();
+        }   else    {
+            $data['grievances'] = Grievance::where('status', $status)->get();
+
+        }
+        
         return view('list_grievances', $data);
     }
 

@@ -14,11 +14,28 @@ class ReportController extends Controller
         $this->data['from'] = $request->from ?? Carbon::now()->firstOfMonth()->format('Y-m-d');
         $this->data['to'] =  $request->to ?? Carbon::now()->format('Y-m-d');
         $this->data['today'] =  Carbon::now()->format('Y-m-d');
-        
     }
+
+    public function list()  {
+        return view('list_reports');
+    }
+
+    public function grievances($status=0)
+    {
+        if(empty($status))  {
+            $this->data['list']  = Grievance::whereDate('created_at', '>=', $this->data['from'])
+            ->whereDate('created_at', '<=', $this->data['to'])->get();
+        }   else    {
+            $this->data['list']  = Grievance::where('status', $status)
+            ->whereDate('created_at', '>=', $this->data['from'])
+            ->whereDate('created_at', '<=', $this->data['to'])
+            ->get();
+        }
+        return view('report_grievances', $this->data);
+    }
+
     public function category(Request $request)
     {
-
         $this->data['list'] = Grievance::select('*', DB::raw('Count(*) as total'))->where('grievance_type_id', '>', 0)
             ->whereDate('created_at', '>=', $this->data['from'])
             ->whereDate('created_at', '<=', $this->data['to'])

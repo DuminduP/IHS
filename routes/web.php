@@ -27,7 +27,7 @@ use App\Http\Controllers\ReportController;
 Route::middleware(['auth'])->group(function () {
 
 Route::get('/', [DashboardController::class, 'dashboard'])->name('dashboard');
-Route::get('/grievance/list', [GrievanceController::class, 'list'])->name('list-grievanse');
+Route::get('/grievance/list/{status?}', [GrievanceController::class, 'list'])->name('list-grievanse');
 Route::get('/grievance/view/{id}', [GrievanceController::class, 'view'])->name('view-grievanse');
 Route::get('/grievance/edit/{id}', [GrievanceController::class, 'edit'])->name('edit-grievanse');
 Route::post('/grievance/edit/{id}', [GrievanceController::class, 'store']);
@@ -61,9 +61,12 @@ Route::post('/staff/edit/{id}', [RegisteredUserController::class, 'update']);
 
 Route::get('/ratings/list/', [RatingsController::class, 'list'])->name('list-ratings');
 
+Route::get('/reports', [ReportController::class, 'list'])->name('reports');
 Route::get('/reports/category/', [ReportController::class, 'category'])->name('report-category');
 Route::get('/reports/status/', [ReportController::class, 'status'])->name('report-status');
 Route::get('/reports/location/', [ReportController::class, 'location'])->name('report-location');
+Route::get('/reports/grievances/{status?}', [ReportController::class, 'grievances'])->name('report-grievances');
+
 });
 
 require __DIR__.'/auth.php';
