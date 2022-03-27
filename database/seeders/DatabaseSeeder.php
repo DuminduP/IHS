@@ -14,10 +14,11 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            GrievanceTypes::class,
-            Provinces::class,
-            Districts::class,
-            Cities::class,
+            SeedGrievanceTypes::class,
+            SeedUserRoles::class,
+            SeedProvinces::class,
+            SeedDistricts::class,
+            SeedCities::class,
         ]);
     }
 }
